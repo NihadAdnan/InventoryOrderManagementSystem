@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - InventoryManageMate</title>
+    <!-- Add Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Ensure Bootstrap is loaded correctly -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Additional CSS files -->
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/InventoryManageMate.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-gray-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-3 border-b border-gray-200">
+            <div class="container">
+                <a class="navbar-brand text-blue-600 font-semibold" asp-area="" asp-controller="Home" asp-action="Index">
+                    InventoryManageMate@Nihad
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-gray-700 hover:text-blue-600" asp-area="" asp-controller="Home" asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-gray-700 hover:text-blue-600" asp-area="" asp-controller="Orders" asp-action="List">
+                                All Orders (Admin)
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-gray-700 hover:text-blue-600" asp-area="" asp-controller="OrderDetails" asp-action="List">
+                                All Orders (User)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mx-auto px-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-t border-gray-200 text-muted mt-4">
+        <div class="container mx-auto px-4 py-3">
+            &copy; 2024 - InventoryManageMate -
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-blue-600 hover:underline">
+                Privacy
+            </a>
+        </div>
+    </footer>
+
+    <!-- Ensure jQuery and Bootstrap JS are loaded correctly -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

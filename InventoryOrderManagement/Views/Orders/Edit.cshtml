@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model InventoryOrderManagement.DTO.DTOs.AddOrderViewModelDTO
+
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center">
+    <div class="relative py-3 w-full">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+        </div>
+        <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 w-full">
+            <div class="max-w-md mx-auto">
+                <h1 class="text-2xl font-semibold text-center mb-6">Edit Order</h1>
+
+                @if (Model is null)
+                {
+                    <p class="text-center text-red-600">No Order was found!</p>
+                }
+                else
+                {
+                    <form method="post" class="space-y-4">
+                        <div>
+                            <label for="id" class="block text-gray-700">Customer Code</label>
+                            <input autocomplete="off" id="id" name="OrderID" type="text" class="mt-1 p-2 border border-gray-300 bg-gray-200 rounded-md w-full" required asp-for="OrderID" readonly />
+                        </div>
+
+                        <div>
+                            <label for="name" class="block text-gray-700">Customer Name</label>
+                            <input autocomplete="off" id="name" name="CustomerName" type="text" class="mt-1 p-2 border border-gray-300 bg-gray-200 rounded-md w-full" required asp-for="CustomerName" readonly />
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-gray-700">Email Address</label>
+                            <input autocomplete="off" id="email" name="CustomerEmail" type="email" class="mt-1 p-2 border border-gray-300 bg-gray-200 rounded-md w-full" required asp-for="CustomerEmail" readonly />
+                        </div>
+
+                        <div>
+                            <label for="address" class="block text-gray-700">Shipping Address</label>
+                            <input autocomplete="off" id="address" name="ShippingAddress" type="text" class="mt-1 p-2 border border-gray-300 rounded-md w-full" required asp-for="ShippingAddress" />
+                        </div>
+
+                        <div>
+                            <label for="payment" class="block text-gray-700">Payment Method</label>
+                            <select id="payment" name="PaymentMethod" class="mt-1 p-2 border border-gray-300 rounded-md w-full" asp-for="PaymentMethod" required>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="PayPal">PayPal</option>
+                                <option value="Cash on Delivery">Cash on Delivery</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="amount" class="block text-gray-700">Total Amount</label>
+                            <input autocomplete="off" id="amount" name="TotalAmount" type="number" step="0.01" class="mt-1 p-2 border border-gray-300 rounded-md w-full" required asp-for="TotalAmount" />
+                        </div>
+
+                        <div class="relative mt-5 flex justify-between">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Save</button>
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" asp-action="Delete" asp-controller="Orders" asp-route-id="@Model.OrderID">Delete</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

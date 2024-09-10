@@ -1,0 +1,70 @@
+/* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Font Size for Responsive Design */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Focus Styles for Buttons and Form Elements */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Ensure Full Height of HTML */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* Add Margin at the Bottom of the Body */
+body {
+    margin-bottom: 60px;
+}
+
+/* Tailwind-based Navbar Styling */
+.navbar {
+    @apply bg-white border-b border-gray-200 shadow-sm;
+}
+
+.navbar-brand {
+    @apply text-lg font-semibold text-blue-600;
+}
+
+.nav-link {
+    @apply text-gray-700 hover:text-blue-600 transition-colors duration-200;
+}
+
+    /* Active State for Navbar Links */
+    .nav-link.active {
+        @apply text-blue-600 font-bold;
+    }
+
+/* Responsive Navbar Collapse */
+.navbar-toggler {
+    @apply text-blue-600 border-0;
+}
+
+    .navbar-toggler:focus {
+        @apply outline-none shadow-none;
+    }
+
+.navbar-collapse {
+    @apply flex-grow items-center;
+}
+
+.container-fluid {
+    @apply px-4;
+}

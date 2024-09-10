@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model InventoryOrderManagement.DTO.DTOs.AddDetailOrderViewModelDTO
+
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div class="relative py-3 w-full">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div class="relative px-4 py-10 bg-white shadow-lg w-full">
+            <div class="max-w-md mx-auto">
+                <h1 class="text-2xl font-semibold text-center">Edit Order</h1>
+
+                @if (Model == null)
+                {
+                    <p class="text-center text-red-500">No Order was found!</p>
+                }
+                else
+                {
+                    <form method="post" action="EditDetail" class="space-y-4">
+
+                        <div>
+                            <label for="id" class="block text-gray-700">Order Code</label>
+                            <input type="text" id="id" class="mt-1 p-2 border border-gray-300  bg-gray-200 rounded-md w-full" required asp-for="OrderDetailID" readonly />
+                        </div>
+
+                        <div>
+                            <label for="name" class="block text-gray-700">Product Name</label>
+                            <input type="text" id="name" class="mt-1 p-2 border border-gray-300 rounded-md w-full" required asp-for="ProductName" />
+                        </div>
+
+                        <div>
+                            <label for="quantity" class="block text-gray-700">Quantity</label>
+                            <input type="number" id="quantity" class="mt-1 p-2 border border-gray-300 rounded-md w-full" step="1" required asp-for="Quantity" />
+                        </div>
+
+                        <div>
+                            <label for="amount" class="block text-gray-700">Unit Price</label>
+                            <input type="number" id="amount" class="mt-1 p-2 border border-gray-300 rounded-md w-full" step="0.01" required asp-for="UnitPrice" />
+                        </div>
+
+                        <div class="relative mt-5 flex justify-between">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Save</button>
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" asp-action="Delete" asp-controller="OrderDetails" asp-route-id="@Model.OrderDetailID">Delete</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

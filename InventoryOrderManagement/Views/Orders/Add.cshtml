@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model InventoryOrderManagement.AggregateRoot.Models.Order
+
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div class="relative py-3 w-full">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+
+        <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 w-full">
+
+            <div class="max-w-md mx-auto">
+                <div class="mb-6">
+                    <h1 class="text-2xl font-semibold text-center mb-6">Add An Order</h1>
+                </div>
+
+                <form method="post" class="space-y-4">
+                    <div class="relative">
+                        <input autocomplete="off" id="name" name="CustomerName" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Customer Name" asp-for="CustomerName" required />
+                        <label for="name" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Customer Name</label>
+                    </div>
+
+                    <div class="relative">
+                        <input autocomplete="off" id="email" name="CustomerEmail" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Email Address" asp-for="CustomerEmail" required />
+                        <label for="email" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+                    </div>
+
+                    <div class="relative">
+                        <input autocomplete="off" id="phone" name="CustomerPhone" type="tel" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Phone Number" asp-for="CustomerPhone" required />
+                        <label for="phone" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Phone Number</label>
+                    </div>
+
+                    <div class="relative">
+                        <input autocomplete="off" id="address" name="ShippingAddress" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Shipping Address" asp-for="ShippingAddress" required />
+                        <label for="address" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Shipping Address</label>
+                    </div>
+
+                    <div class="relative">
+                        <input autocomplete="off" id="date" name="OrderDate" type="date" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Order Date" asp-for="OrderDate" required />
+                        <label for="date" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Order Date</label>
+                    </div>
+
+                    <div class="relative">
+                        <select id="status" name="OrderStatus" class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" asp-for="OrderStatus" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <label for="status" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Order Status</label>
+                    </div>
+
+                    <div class="relative">
+                        <select id="payment" name="PaymentMethod" class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" asp-for="PaymentMethod" required>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                        </select>
+                        <label for="payment" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Payment Method</label>
+                    </div>
+
+                    <div class="relative">
+                        <input autocomplete="off" id="amount" name="TotalAmount" type="number" step="0.01" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600" placeholder="Total Amount" asp-for="TotalAmount" required />
+                        <label for="amount" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Total Amount</label>
+                    </div>
+
+                    <div class="relative mt-5">
+                        <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 w-full">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
