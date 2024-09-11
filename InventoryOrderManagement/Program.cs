@@ -1,6 +1,4 @@
 using InventoryOrderManagement.AggregateRoot;
-using InventoryOrderManagement.AggregateRoot.BusinessLogic;
-using InventoryOrderManagement.AggregateRoot.Mappers;
 using InventoryOrderManagement.Handler.Interfaces;
 using InventoryOrderManagement.Handler.Services;
 using InventoryOrderManagement.Repository.Data;
@@ -16,12 +14,25 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("InventoryOrderManagementSystem"))); // Update connection string name appropriately
 
+
+//Exportservies
+builder.Services.AddScoped<OrderExportService>();
+builder.Services.AddScoped<OrderDetailExportService>();
 // Register handlers
 builder.Services.AddScoped<IOrderHandler, OrderHandler>();
 builder.Services.AddScoped<IOrderDetailHandler, OrderDetailHandler>();
 
-// Register ExportService
-builder.Services.AddScoped<ExportService>();
+
+
+
+
+
+//builder.Services.AddScoped<OrderDetailExportService>();
+
+
+
+
+
 
 // Register the generic repository
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

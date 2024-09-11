@@ -1,15 +1,79 @@
-﻿using iTextSharp.text.pdf;
+﻿using InventoryOrderManagement.DTO.DTOs;
+using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InventoryOrderManagement.DTO.DTOs;
 
-namespace InventoryOrderManagement.AggregateRoot.BusinessLogic
+namespace InventoryOrderManagement.AggregateRoot
 {
-    public class ExportService
+    public class Order
+    {
+        [Key]
+        public Guid OrderID { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string? CustomerName { get; set; }
+
+        [StringLength(100)]
+        public string? CustomerEmail { get; set; }
+
+        [StringLength(20)]
+        public string? CustomerPhone { get; set; }
+
+        [StringLength(255)]
+        public string? ShippingAddress { get; set; }
+
+        [Required]
+        public DateTime OrderDate { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string OrderStatus { get; set; } = "Pending";
+
+        [StringLength(50)]
+        public string? PaymentMethod { get; set; }
+
+        [Required]
+        [Range(0, 999999999999.99)]
+        public decimal TotalAmount { get; set; }
+    }
+
+    public static class OrderMappers
+    {
+        public static AddOrderViewModelDTO ToOrderViewModel(this Order orderModel)
+        {
+            return new AddOrderViewModelDTO
+            {
+                OrderID = orderModel.OrderID,
+                CustomerName = orderModel.CustomerName,
+                CustomerEmail = orderModel.CustomerEmail,
+                TotalAmount = orderModel.TotalAmount,
+                PaymentMethod = orderModel.PaymentMethod,
+                ShippingAddress = orderModel.ShippingAddress
+            };
+        }
+
+        public static Order ToOrderModel(this AddOrderViewModelDTO orderViewModel)
+        {
+            return new Order
+            {
+                OrderID = orderViewModel.OrderID,
+                CustomerName = orderViewModel.CustomerName,
+                CustomerEmail = orderViewModel.CustomerEmail,
+                TotalAmount = orderViewModel.TotalAmount,
+                PaymentMethod = orderViewModel.PaymentMethod,
+                ShippingAddress = orderViewModel.ShippingAddress,
+                OrderDate = DateTime.UtcNow,
+                OrderStatus = "Pending"
+            };
+        }
+    }
+    public class OrderExportService
     {
         public byte[] ExportOrdersToCsv(List<AddOrderViewModelDTO> orders)
         {
@@ -55,50 +119,7 @@ namespace InventoryOrderManagement.AggregateRoot.BusinessLogic
                 return stream.ToArray();
             }
         }
-
-        public byte[] ExportOrderDetailsToCsv(List<AddDetailOrderViewModelDTO> orderDetails)
-        {
-            var builder = new StringBuilder();
-            builder.AppendLine("Product Name,Quantity,Unit Price");
-
-            foreach (var orderDetail in orderDetails)
-            {
-                builder.AppendLine($"{orderDetail.ProductName},{orderDetail.Quantity},{orderDetail.UnitPrice}");
-            }
-
-            return Encoding.UTF8.GetBytes(builder.ToString());
-        }
-
-        public byte[] ExportOrderDetailsToPdf(List<AddDetailOrderViewModelDTO> orderDetails)
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                Document pdfDoc = new Document(PageSize.A4);
-                PdfWriter.GetInstance(pdfDoc, stream).CloseStream = false;
-                pdfDoc.Open();
-
-                PdfPTable table = new PdfPTable(3);
-                table.WidthPercentage = 100;
-                table.AddCell(new PdfPCell(new Phrase("Product Name")) { HorizontalAlignment = Element.ALIGN_CENTER, BackgroundColor = BaseColor.LIGHT_GRAY });
-                table.AddCell(new PdfPCell(new Phrase("Quantity")) { HorizontalAlignment = Element.ALIGN_CENTER, BackgroundColor = BaseColor.LIGHT_GRAY });
-                table.AddCell(new PdfPCell(new Phrase("Unit Price")) { HorizontalAlignment = Element.ALIGN_CENTER, BackgroundColor = BaseColor.LIGHT_GRAY });
-
-                foreach (var orderDetail in orderDetails)
-                {
-                    table.AddCell(orderDetail.ProductName ?? string.Empty);
-                    table.AddCell(orderDetail.Quantity.ToString());
-                    table.AddCell(orderDetail.UnitPrice.ToString("F2"));
-                }
-
-                pdfDoc.Add(table);
-                pdfDoc.Close();
-
-                return stream.ToArray();
-            }
-        }
     }
+
+
 }
-
-
-
-

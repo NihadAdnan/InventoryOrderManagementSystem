@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using InventoryOrderManagement.AggregateRoot.Models;
+using InventoryOrderManagement.AggregateRoot;
 using InventoryOrderManagement.Repository.Data;
 using Microsoft.Extensions.Options;
 

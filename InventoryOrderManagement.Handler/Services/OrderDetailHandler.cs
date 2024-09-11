@@ -1,17 +1,15 @@
-﻿using InventoryOrderManagement.AggregateRoot.BusinessLogic;
-using InventoryOrderManagement.AggregateRoot.Models;
+﻿using InventoryOrderManagement.AggregateRoot;
 using InventoryOrderManagement.Handler.Interfaces;
 using InventoryOrderManagement.Repository.GenericRepositories;
-using InventoryOrderManagement.AggregateRoot.Mappers;
 using InventoryOrderManagement.DTO.DTOs;
 namespace InventoryOrderManagement.Handler.Services
 {
     public class OrderDetailHandler : IOrderDetailHandler
     {
         private readonly IGenericRepository<OrderDetail> _orderDetailRepository;
-        private readonly ExportService _exportService;
+        private readonly OrderDetailExportService _exportService;
 
-        public OrderDetailHandler(IGenericRepository<OrderDetail> orderDetailRepository, ExportService exportService)
+        public OrderDetailHandler(IGenericRepository<OrderDetail> orderDetailRepository, OrderDetailExportService exportService)
         {
             _orderDetailRepository = orderDetailRepository;
             _exportService = exportService;
